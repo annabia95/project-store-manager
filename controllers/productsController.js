@@ -15,7 +15,7 @@ const getByIdProduct = async (req, res, next) => {
     const { id } = req.params;
 
     const product = await productsService.getByIdProduct(Number(id));
-    
+
     if (product.length === 0) {
       res.status(404).json({ message: 'Product not found' });
     }
@@ -29,4 +29,4 @@ const getByIdProduct = async (req, res, next) => {
 module.exports = {
   getAllProducts,
   getByIdProduct,
-};
+}; 

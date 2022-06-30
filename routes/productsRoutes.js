@@ -8,4 +8,4 @@ router.get('/', productsControllers.getAllProducts);
 
 router.get('/:id', productsControllers.getByIdProduct);
 
-module.exports = router;
+module.exports = router; 
