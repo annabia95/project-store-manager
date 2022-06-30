@@ -18,8 +18,8 @@ const searchProduct = async (name) => {
   return product;
 };
 
-const add = async (name, quantity) => {
-  const product = await productsModel.add(name, quantity);
+const add = async (name) => {
+  const product = await productsModel.add(name);
 
   return product;
 };

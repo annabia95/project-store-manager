@@ -28,15 +28,16 @@ const getByIdProduct = async (req, res, next) => {
 
 const add = async (req, res, next) => {
   try {
-    const { name, quantity } = req.body;
+    const { name } = req.body;
+
     const searchProduct = await productsService.searchProduct(name);
     if (searchProduct.length === 1) {
       return res.status(409).json({ message: 'Product already exists' });
     }
-    const product = await productsService.add(name, quantity);
-    res.status(201).json(...product);
-   } catch (err) {
-    next(err);
+    const product = await productsService.add(name);
+    return res.status(201).json(product);
+   } catch (error) {
+    next(error);
    }
 };
 
