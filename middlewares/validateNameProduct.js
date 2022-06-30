@@ -1,18 +1,15 @@
-const Joi = require('joi');
-
-const charactersDTO = Joi.object({
-    name: Joi.string().required(),
-}).messages({
-    'any.required': '{{#label}} is required',
-});
-
 const validateNameProduct = (req, res, next) => {
-    const { error } = charactersDTO.validate(req.body);
-    if (error) {
-        const messages = error.details.map((e) => e.message);
-        return res.status(400).json({ errors: messages });
-    }
-    next();
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ message: '"name" is required' });
+  }
+
+  if (name.length < 5) {
+    return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+  }
+  
+  next();
 };
 
 module.exports = validateNameProduct;
