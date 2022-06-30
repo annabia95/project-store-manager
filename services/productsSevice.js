@@ -7,6 +7,13 @@ const getAllProducts = (id = null) => {
     return productsModel.getByIdProduct();
 };
 
+const getByIdProduct = async (id) => {
+  const product = await productsModel.getByIdProduct(id);
+
+  return product;
+};
+
 module.exports = {
   getAllProducts,
+  getByIdProduct,
 };
