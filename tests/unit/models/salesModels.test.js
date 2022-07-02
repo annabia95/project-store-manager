@@ -26,18 +26,18 @@ const resultExecute = [
 describe('Testando camada Model - function getAllSales()', () => {
   describe('quando não existe nenhuma venda criada', () => {
     before(() => {
-      const resultExecute = [[]];
-      sinon.stub(connection, 'execute').resolves(resultExecute)
+      sinon.stub(connection, 'execute').resolves([[]])
     })
-  });
-
-  after(() => {
+      after(() => {
     connection.execute.restore();
   })
   it('retorna um array', async () => {
     const response = await salesModel.getAllSales();
     expect(response).to.be.an('array');
   });
+  });
+
+
 
   describe('quando existem vendas criadas', () => {
     before(() => {
@@ -51,7 +51,7 @@ describe('Testando camada Model - function getAllSales()', () => {
     it('retorna um array', async () => {
       const response = await salesModel.getAllSales();
 
-      expect(response).to.be.an('array');
+      expect(response).to.be.an('object');
     });
 
     it('o array não está vazio', async () => {

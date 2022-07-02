@@ -26,8 +26,8 @@ const resultExecute = [
 ];
 
 
-describe('Testando camada Controller - function getAllProducts()', () => {
-  describe('quando existem filmes no banco de dados', async () => {
+describe('Testando camada Controller - function getAllSales()', () => {
+  describe('quando existem filmes no banco de dados', () => {
     const response = {};
     const request = {};
 
@@ -44,7 +44,7 @@ describe('Testando camada Controller - function getAllProducts()', () => {
     })
 
     after(() => {
-      salesController.getAllSales.restore();
+      salesService.getAllSales.restore();
     });
 
     it('é chamado o método "status" passando o código 200', async () => {

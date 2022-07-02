@@ -37,13 +37,13 @@ describe('Testando camada Service - function getAllSales()', () => {
     });
 
     it('Testa se o retorno é um array', async () => {
-      const response = await salesService.getAllProducts();
+      const response = await salesService.getAllSales();
 
       expect(response).to.be.an('array');
     });
 
     it('Testa se o array retornado não está vazio', async () => {
-      const response = await salesService.getAllProducts();
+      const response = await salesService.getAllSales();
 
       expect(response).to.not.be.empty;
     });

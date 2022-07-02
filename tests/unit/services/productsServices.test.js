@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 
 const productModel = require("../../../models/productsModel");
-const productsService = require("../../../services/productsSevice")
+const prouctsService = require("../../../services/productsSevice")
 
 const resultExecute = [
     {
@@ -31,13 +31,13 @@ describe('Testando camada Service - function getAllProducts()', () => {
   });
 
   it('Testa se o retorno é um array', async () => {
-    const response = await productsService.getAllProducts();
+    const response = await prouctsService.getAllProducts();
 
     expect(response).to.be.an('array');
   });
 
   it('Testa se o array retornado não está vazio', async () => {
-    const response = await productsService.getAllProducts();
+    const response = await prouctsService.getAllProducts();
 
     expect(response).to.not.be.empty;
   });

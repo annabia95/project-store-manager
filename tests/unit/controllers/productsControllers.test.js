@@ -20,7 +20,7 @@ const resultExecute = [
 ];
 
 describe('Testando camada Controller - function getAllProducts()', () => {
-  describe('quando existem filmes no banco de dados', async () => {
+  describe('quando existem filmes no banco de dados', () => {
     const response = {};
     const request = {};
 

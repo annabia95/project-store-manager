@@ -3,28 +3,10 @@ const { expect } = require('chai');
 const connection = require("../../../db/connection");
 const productsModel = require("../../../models/productsModel");
 
-describe('Testando camada Model - function getAllProducts()', () => {
-  describe('quando não existe nenhum produto criado', () => {
-    before(() => {
-      const resultExecute = [[]];
-      sinon.stub(connection, 'execute').resolves(resultExecute)
-    })
-  });
-
-  after(() => {
-    connection.execute.restore();
-  })
-  it('retorna um array', async () => {
-    const response = await productsModel.getAllProducts();
-    expect(response).to.be.an('array');
-  });
-
-  describe('quando existem produtos criados', () => {
-    before(() => {
       const resultExecute = [
     {
       id: 1,
-      name: 'Martelo de Thor',
+      name: 'Martelo de Batman',
     },
     {
       id: 2,
@@ -35,6 +17,27 @@ describe('Testando camada Model - function getAllProducts()', () => {
       name: 'Escudo do Capitão América',
     },
 ];
+
+describe('Testando camada Model - function getAllProducts()', () => {
+  describe('quando não existe nenhum produto criado', () => {
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([[]])
+    })
+      after(() => {
+    connection.execute.restore();
+      })
+    
+  it('retorna um array', async () => {
+    const response = await productsModel.getAllProducts();
+    expect(response).to.be.an('array');
+  });
+
+
+  });
+
+  describe('quando existem produtos criados', () => {
+    before(() => {
+
       sinon.stub(connection, 'execute').resolves(resultExecute);
     })
 
@@ -45,7 +48,7 @@ describe('Testando camada Model - function getAllProducts()', () => {
     it('retorna um array', async () => {
       const response = await productsModel.getAllProducts();
 
-      expect(response).to.be.an('array');
+      expect(response).to.be.an('object');
     });
 
     it('o array não está vazio', async () => {
