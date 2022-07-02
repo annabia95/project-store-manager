@@ -28,12 +28,16 @@ describe('Testando camada Model - function getAllSales()', () => {
     before(() => {
       sinon.stub(connection, 'execute').resolves([[]])
     })
-      after(() => {
-    connection.execute.restore();
-  })
-  it('retorna um array', async () => {
-    const response = await salesModel.getAllSales();
-    expect(response).to.be.an('array');
+    after(() => {
+      connection.execute.restore();
+    })
+    it('retorna um array', async () => {
+      const response = await salesModel.getAllSales();
+      expect(response).to.be.an('array');
+    });
+    it('retorna um array vazio', async () => {
+      const response = await salesModel.getAllSales();
+      expect(response).to.be.empty;
   });
   });
 

@@ -42,7 +42,32 @@ describe('Testando camada Service - function getAllProducts()', () => {
     expect(response).to.not.be.empty;
   });
 });
+});
 
-  
-  
+describe("Testando camada Service - function add()", () => {
+  describe("quando é inserido com sucesso", async () => {
+  const payloadProduct = {
+    name: 'Escudo da Mulher Maravilha',
+  };
+
+    before(() => {
+      sinon.stub(productModel, 'add').resolves({ id: 1 });
+    });
+
+    after(() => {
+      productModel.add.restore();
+    });
+
+    it("retorna um objeto", async () => {
+      const response = await prouctsService.add(payloadProduct);
+
+      expect(response).to.be.a("object");
+    });
+
+    it('tal objeto possui o "id" do novo produto inserido', async () => {
+
+      const response = await prouctsService.add(payloadProduct);
+      expect(response).to.have.a.property("id");
+    });
+  });
 });

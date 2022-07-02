@@ -6,7 +6,7 @@ const productsModel = require("../../../models/productsModel");
       const resultExecute = [
     {
       id: 1,
-      name: 'Martelo de Batman',
+      name: 'Martelo do Batman',
     },
     {
       id: 2,
@@ -20,18 +20,17 @@ const productsModel = require("../../../models/productsModel");
 
 describe('Testando camada Model - function getAllProducts()', () => {
   describe('quando não existe nenhum produto criado', () => {
-    before(() => {
-      sinon.stub(connection, 'execute').resolves([[]])
+  before(() => {
+    sinon.stub(connection, 'execute').resolves([[]])
     })
-      after(() => {
+  after(() => {
     connection.execute.restore();
-      })
+    })
     
   it('retorna um array', async () => {
     const response = await productsModel.getAllProducts();
     expect(response).to.be.an('array');
   });
-
 
   });
 
@@ -70,6 +69,33 @@ describe('Testando camada Model - function getAllProducts()', () => {
         'id',
         'name',
       );
+    });
+  });
+});
+
+describe("Testando camada Model - function add()", () => {
+  const payloadProduct = {
+    name: 'Escudo da Mulher Maravilha',
+  };
+
+  before(() => {
+    const execute = [{ insertId: 1 }];
+    sinon.stub(connection, "execute").resolves(execute);
+  });
+
+  after(() => {
+    connection.execute.restore();
+  });
+
+  describe("quando é inserido com sucesso", async () => {
+    it("retorna um objeto", async () => {
+      const response = await productsModel.add(payloadProduct);
+      expect(response).to.be.a("object");
+    });
+
+    it('tal objeto possui o "id" do novo produto inserido', async () => {
+      const response = await productsModel.add(payloadProduct);
+      expect(response).to.have.a.property("id");
     });
   });
 });
