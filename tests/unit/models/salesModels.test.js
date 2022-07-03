@@ -82,3 +82,32 @@ describe('Testando camada Model - function getAllSales()', () => {
     });
   });
 });
+
+describe("Testando camada Model - function  addSalesProducts()", () => {
+  const payloadSales = {
+    saleId: 1,
+    productId: 1,
+    quantity: 15,
+  };
+
+  before(() => {
+    const execute = [{ saleId: 1 }];
+    sinon.stub(connection, "execute").resolves(execute);
+  });
+
+  after(() => {
+    connection.execute.restore();
+  });
+
+  describe("quando é inserida com sucesso", async () => {
+    it("retorna um objeto", async () => {
+      const response = await salesModel.addSalesProducts(payloadSales);
+      expect(response).to.be.a("object");
+    });
+
+    it('tal objeto possui o "quantity" do novo produto inserido', async () => {
+      const response = await salesModel.addSalesProducts(payloadSales);;
+      expect(response).to.have.a.property("quantity");
+    });
+  });
+});
