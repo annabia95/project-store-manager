@@ -99,3 +99,19 @@ describe("Testando camada Model - function add()", () => {
     });
   });
 });
+
+describe("Testando camada Model - function remove()", () => {
+  before(() => {
+    sinon.stub(connection, 'execute').resolves();
+  });
+
+  after(() => {
+    connection.execute.restore();
+  });
+
+  it("Testa se é possível deletar um produto", async () => {
+    const response = await productsModel.remove(1);
+
+    expect(response).to.be.undefined;
+  });
+});s

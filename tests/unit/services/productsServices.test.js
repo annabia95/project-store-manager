@@ -71,3 +71,25 @@ describe("Testando camada Service - function add()", () => {
     });
   });
 });
+
+describe("Testando camada Service - function deleteProduct()", () => {
+  before(() => {
+    sinon.stub(productModel, 'remove').resolves([]);
+  });
+
+  after(() => {
+    productModel.remove.restore();
+  });
+
+  it('o retorno é um array', async () => {
+    const response = await prouctsService.deleteProduct(1);
+
+    expect(response).to.be.an('array');
+  });
+
+  it('o array retornado está vazio', async () => {
+    const response = await prouctsService.deleteProduct(1);
+
+    expect(response).to.be.empty;
+  });
+});
